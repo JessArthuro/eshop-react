@@ -2,5 +2,9 @@
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react"
+  ],
+  "plugins": [
+    // Configuracion de babel para que no rompa la aplicacion cuando esta esperando la respuesta de la API
+    "@babel/plugin-transform-runtime"
   ]
 }

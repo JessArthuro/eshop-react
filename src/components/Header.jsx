@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Menu from "@components/Menu";
 import "@styles/Header.scss";
-
 import menu from "@icons/icon_menu.svg";
 import logo from "@logos/logo_yard_sale.svg";
+import AppContext from "../context/AppContext";
 import shoppingCart from "@icons/icon_shopping_cart.svg";
 
 function Header() {
+  // Usamos el contexto para poder acceder al hook en useInitialState y obtener el valor de cart. Desestructuramos las propiedades del objeto para poder acceder mas facil
+  const {
+    state: { cart },
+  } = useContext(AppContext);
+
+  // Estado para mostrar/ocultar el Menu
   const [toggle, setToggle] = useState(false);
 
   const handleToggle = () => {
@@ -49,7 +55,8 @@ function Header() {
           </li>
           <li className="navbar-shopping-cart">
             <img src={shoppingCart} alt="shopping cart" />
-            <div>2</div>
+            {/* Validacion para mostrar dependiendo de la longitud de la propiedad cart, la cantidad de elementos añadidos al carrito */}
+            {cart.length > 0 ? <div>{cart.length}</div> : null}
           </li>
         </ul>
       </div>

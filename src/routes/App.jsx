@@ -11,27 +11,38 @@ import CreateAccount from "@pages/CreateAccount";
 import Checkout from "@pages/Checkout";
 import Orders from "@pages/Orders";
 import NotFound from "@pages/NotFound";
+import AppContext from "../context/AppContext";
+import useInitialState from "../hooks/useInitialState";
 import "@styles/global.css";
 
 function App() {
+  const initialState = useInitialState();
+
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/password-recovery" element={<PasswordRecovery />} />
-          <Route exact path="/send-email" element={<SendEmail />} />
-          <Route exact path="/new-password" element={<NewPassword />} />
-          <Route exact path="/account" element={<MyAccount />} />
-          <Route exact path="/signup" element={<CreateAccount />} />
-          <Route exact path="/checkout" element={<Checkout />} />
-          <Route exact path="/orders" element={<Orders />} />
-          {/* El componente NotFound se va ejecutar cuando no se encuentre una ruta especificada */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    // De esta manera el contexto esta disponible para todos los componentes de la aplicacion
+    <AppContext.Provider value={initialState}>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route
+              exact
+              path="/password-recovery"
+              element={<PasswordRecovery />}
+            />
+            <Route exact path="/send-email" element={<SendEmail />} />
+            <Route exact path="/new-password" element={<NewPassword />} />
+            <Route exact path="/account" element={<MyAccount />} />
+            <Route exact path="/signup" element={<CreateAccount />} />
+            <Route exact path="/checkout" element={<Checkout />} />
+            <Route exact path="/orders" element={<Orders />} />
+            {/* El componente NotFound se va ejecutar cuando no se encuentre una ruta especificada */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </AppContext.Provider>
   );
 }
 

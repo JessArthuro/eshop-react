@@ -26,7 +26,7 @@ function MyOrder() {
       </div>
       <div className="my-order-content">
         {cart.map((product, index) => (
-          <OrderItem key={index} product={product} />
+          <OrderItem indexValue={index} key={index} product={product} />
         ))}
         <div className="order">
           <p>

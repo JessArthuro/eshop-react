@@ -17,10 +17,19 @@ const useInitialState = () => {
     });
   };
 
+  const removeFromCart = (indexValue) => {
+    setState({
+      ...state,
+      // El metodo filter condiciona que los elementos añadidos al carrito que no sean igual al indexValue que se selecciono se quedan pero el que coincide lo remueve 
+      cart: state.cart.filter((_, index) => index !== indexValue),
+    });
+  };
+
   // Retornamos el valor de state y la funcion de añadir al carrito para que pueda ser accedida por cualquier componente
   return {
     state,
     addToCart,
+    removeFromCart,
   };
 };
 
